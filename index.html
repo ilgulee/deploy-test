@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>My Google Map</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
+    <style>
+        /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+
+        #map {
+            height: 70%;
+            width: 70%;
+            margin: auto;
+        }
+
+        /* Optional: Makes the sample page fill the window. */
+
+        html,
+        body {
+            height: 100%;
+            margin: 10px;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="map"></div>
+    <script>
+        var map;
+        var lat = 43.6532;
+        var lng = -79.3832;
+        var toronto = {
+            lat: lat,
+            lng: lng
+        }
+        var zoom = 9;
+
+        var option = {
+            center: toronto,
+            zoom: zoom
+        }
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), option);
+            // The marker, positioned at Uluru
+            var marker = new google.maps.Marker({
+                position: toronto,
+                map: map
+            });
+
+            var infoWindow=new google.maps.InfoWindow({
+                content:'<h3>Place Info</h3>'
+            });
+            marker.addListener('click',()=>{
+                infoWindow.open(map,marker);
+            });
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBaRNZg9B5jpSvf6he0WxoPJY1DSinAcMU&callback=initMap" async
+        defer></script>
+</body>
+
+</html>
